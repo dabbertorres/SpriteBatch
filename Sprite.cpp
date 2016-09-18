@@ -130,7 +130,7 @@ namespace swift
 		else if(angle > 360)
 			angle -= 360 * (static_cast<int>(angle) / 360);
 			
-		constexpr float PI = 3.14159265359;
+		constexpr float PI = 3.14159265359f;
 		
 		// get the local coordinates
 		std::array<sf::Vector2f, 4> verts;
