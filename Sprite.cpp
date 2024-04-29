@@ -1,4 +1,5 @@
 #include "Sprite.hpp"
+#include <cmath>
 
 namespace swift
 {
