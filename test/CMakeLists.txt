@@ -5,7 +5,8 @@ pkg_check_modules(SFML REQUIRED IMPORTED_TARGET sfml-all)
 add_executable(main 
     test.cpp 
     ../Sprite.cpp
-    ../SpriteBatch.cpp)
+    ../SpriteBatch.cpp
+    ../Common.cpp)
 include_directories(../)
 
 target_link_libraries(main PUBLIC PkgConfig::SFML)
