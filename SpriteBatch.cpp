@@ -2,6 +2,7 @@
 #include "Common.hpp"
 #include <SFML/Graphics/PrimitiveType.hpp>
 #include <SFML/System/Vector2.hpp>
+#include <iostream>
 
 namespace swift
 {
@@ -41,12 +42,16 @@ namespace swift
 	{
 		if((spriteNum + 1) * 6 <= vertices.size())
 		{
+            std::cout << "Adding sprite, spriteNum = " << spriteNum << std::endl;
 			unsigned int s = spriteNum * 6;
 			spriteNum++;
 			return {&vertices[s], &vertices[s + 1], &vertices[s + 2], &vertices[s + 3], &vertices[s+4], &vertices[s+5]};
 		}
 		else
+        {
+            std::cout << " Not adding sprite, (spriteNum+1)*6=" << (spriteNum+1)*6 << std::endl;
 			return {nullptr};
+        }
 	}
 	
 	sf::Vector2u SpriteBatch::getTextureSize() const

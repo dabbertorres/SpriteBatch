@@ -20,7 +20,6 @@ int main(int argc, char **argv)
 	swift::SpriteBatch batch(texture, 3);
 	
 	swift::Sprite spriteOne(batch);
-    //spriteOne.setRotation(180);
 	spriteOne.setOrigin({spriteOne.getLocalBounds().width / 2, spriteOne.getLocalBounds().height / 2});
 	spriteOne.setScale({2, 2});
 	spriteOne.setPosition({400, 400});

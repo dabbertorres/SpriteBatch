@@ -1,5 +1,6 @@
 #include "Sprite.hpp"
 #include "Common.hpp"
+#include <SFML/Graphics/Rect.hpp>
 #include <SFML/System/Vector2.hpp>
 #include <cmath>
 
@@ -21,21 +22,12 @@ namespace swift
         for( int i = 0; i < 6; i++ ) { 
             vertices[i]->position = triangles[i];
         }
-		
-        /// Quad (Deprecated)
-		/*vertices[0]->position = {0, 0};
-		vertices[1]->position = {static_cast<float>(texSize.x), 0};
-		vertices[2]->position = static_cast<sf::Vector2f>(texSize);
-		vertices[3]->position = {0, static_cast<float>(texSize.y)};*/
 	}
 
 	Sprite::Sprite(SpriteBatch& batch, const sf::IntRect& texRect)
 	:	Sprite(batch)
 	{
-		vertices[0]->texCoords = {static_cast<float>(texRect.left), static_cast<float>(texRect.top)};
-		vertices[1]->texCoords = {static_cast<float>(texRect.left) + static_cast<float>(texRect.width), static_cast<float>(texRect.top)};
-		vertices[2]->texCoords = {static_cast<float>(texRect.left) + static_cast<float>(texRect.width), static_cast<float>(texRect.top) + static_cast<float>(texRect.height)};
-		vertices[3]->texCoords = {static_cast<float>(texRect.left), static_cast<float>(texRect.top) + static_cast<float>(texRect.height)};
+        this->setTextureRect(texRect);
 	}
 
 	Sprite::~Sprite()
@@ -110,10 +102,10 @@ namespace swift
 
 	void Sprite::setTextureRect(const sf::IntRect& texRect)
 	{
-		vertices[0]->texCoords = {static_cast<float>(texRect.left), static_cast<float>(texRect.top)};
-		vertices[1]->texCoords = {static_cast<float>(texRect.left) + static_cast<float>(texRect.width), static_cast<float>(texRect.top)};
-		vertices[2]->texCoords = {static_cast<float>(texRect.left) + static_cast<float>(texRect.width), static_cast<float>(texRect.top) + static_cast<float>(texRect.height)};
-		vertices[3]->texCoords = {static_cast<float>(texRect.left), static_cast<float>(texRect.top) + static_cast<float>(texRect.height)};
+        std::array<sf::Vector2f, 6> triangles = getTrianglesFromRect(sf::FloatRect(texRect));
+        for( int i = 0; i < 6; i++ ) { 
+            vertices[i]->texCoords = triangles[i];
+        }
 	}
 
 	void Sprite::setColor(const sf::Color& color)
