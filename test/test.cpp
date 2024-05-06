@@ -21,6 +21,7 @@ int main(int argc, char **argv)
 	
 	swift::Sprite spriteOne(batch);
 	spriteOne.setOrigin({spriteOne.getLocalBounds().width / 2, spriteOne.getLocalBounds().height / 2});
+    spriteOne.setRotation(180);
 	spriteOne.setScale({2, 2});
 	spriteOne.setPosition({400, 400});
 	spriteOne.scale({0.5, 0.5});
