@@ -17,16 +17,20 @@ int main(int argc, char **argv)
 		std::cerr << "error loading texture\n";
 	}
 	
-	swift::SpriteBatch batch(texture, 2);
+	swift::SpriteBatch batch(texture, 3);
 	
 	swift::Sprite spriteOne(batch);
+    //spriteOne.setRotation(180);
 	spriteOne.setOrigin({spriteOne.getLocalBounds().width / 2, spriteOne.getLocalBounds().height / 2});
-    spriteOne.setRotation(180);
 	spriteOne.setScale({2, 2});
 	spriteOne.setPosition({400, 400});
 	spriteOne.scale({0.5, 0.5});
+
 	swift::Sprite spriteTwo(batch);
 	spriteTwo.setPosition({400, 200});
+    /// Should only show half spriteThree
+	swift::Sprite spriteThree(batch, sf::IntRect(0, 0, 32, 64));
+	spriteThree.setPosition({400, 100});
 	
 	while(window.isOpen())
 	{
