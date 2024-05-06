@@ -3,7 +3,7 @@
 #include <array>
 
 
-std::array<sf::Vector2f, 6> getTrianglesFromVector(sf::Vector2f vec) {
+std::array<sf::Vector2f, 6> swift::getTrianglesFromVector(sf::Vector2f vec) {
     std::array<sf::Vector2f, 6> returnValue = std::array<sf::Vector2f, 6>();
     
     /// Triangle 1

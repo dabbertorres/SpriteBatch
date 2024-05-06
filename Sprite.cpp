@@ -1,4 +1,6 @@
 #include "Sprite.hpp"
+#include "Common.hpp"
+#include <SFML/System/Vector2.hpp>
 #include <cmath>
 
 namespace swift
@@ -14,11 +16,17 @@ namespace swift
 			throw nullptr;
 		
 		sf::Vector2u texSize = batch.getTextureSize();
+
+        std::array<sf::Vector2f, 6> triangles = getTrianglesFromVector(sf::Vector2f(texSize));
+        for( int i = 0; i < 6; i++ ) { 
+            vertices[i]->position = triangles[i];
+        }
 		
-		vertices[0]->position = {0, 0};
+        /// Quad (Deprecated)
+		/*vertices[0]->position = {0, 0};
 		vertices[1]->position = {static_cast<float>(texSize.x), 0};
 		vertices[2]->position = static_cast<sf::Vector2f>(texSize);
-		vertices[3]->position = {0, static_cast<float>(texSize.y)};
+		vertices[3]->position = {0, static_cast<float>(texSize.y)};*/
 	}
 
 	Sprite::Sprite(SpriteBatch& batch, const sf::IntRect& texRect)

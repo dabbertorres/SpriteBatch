@@ -37,7 +37,7 @@ namespace swift
 			void setOrigin(const sf::Vector2f& o);
 
 		private:
-			std::array<sf::Vertex*, 4> vertices;
+			std::array<sf::Vertex*, 6> vertices;
 			sf::Vector2f origin;
 			sf::Vector2f scaleFactor;
 			float angle;
