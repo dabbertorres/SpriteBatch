@@ -1,5 +1,6 @@
 #include "SpriteBatch.hpp"
 #include "Common.hpp"
+#include <SFML/Graphics/PrimitiveType.hpp>
 #include <SFML/System/Vector2.hpp>
 
 namespace swift
@@ -56,6 +57,6 @@ namespace swift
 	void SpriteBatch::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	{
 		states.texture = &texture;
-		target.draw(vertices.data(), spriteNum * 4, sf::Quads, states);
+		target.draw(vertices.data(), spriteNum * 6, sf::Triangles, states);
 	}
 }

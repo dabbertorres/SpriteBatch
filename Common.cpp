@@ -1,10 +1,13 @@
 #include "Common.hpp"
 #include <SFML/System/Vector2.hpp>
 #include <array>
+#include <ctime>
+#include <cmath>
 
 
 std::array<sf::Vector2f, 6> swift::getTrianglesFromVector(sf::Vector2f vec) {
     std::array<sf::Vector2f, 6> returnValue = std::array<sf::Vector2f, 6>();
+    int timeTmp = time(nullptr);
     
     /// Triangle 1
     returnValue[0] = {0, 0}; /// Top Left
