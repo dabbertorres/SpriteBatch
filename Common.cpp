@@ -2,14 +2,11 @@
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/System/Vector2.hpp>
 #include <array>
-#include <ctime>
-#include <cmath>
 
 
 std::array<sf::Vector2f, 6> swift::getTrianglesFromVector(sf::Vector2f vec) {
     std::array<sf::Vector2f, 6> returnValue = std::array<sf::Vector2f, 6>();
-    int timeTmp = time(nullptr);
-    
+
     /// Triangle 1
     returnValue[0] = {0, 0};     /// Top Left
     returnValue[1] = {vec.x, 0}; /// Top Right
@@ -23,7 +20,6 @@ std::array<sf::Vector2f, 6> swift::getTrianglesFromVector(sf::Vector2f vec) {
 
 std::array<sf::Vector2f, 6> swift::getTrianglesFromRect(sf::FloatRect vec) {
     std::array<sf::Vector2f, 6> returnValue = std::array<sf::Vector2f, 6>();
-    int timeTmp = time(nullptr);
 
     /// Triangle 1
     returnValue[0] = {0,                  0}; /// Top Left
