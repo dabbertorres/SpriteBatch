@@ -1,4 +1,8 @@
 #include "Sprite.hpp"
+#include "Common.hpp"
+#include <SFML/Graphics/Rect.hpp>
+#include <SFML/System/Vector2.hpp>
+
 #include <cmath>
 
 namespace swift
@@ -14,20 +18,17 @@ namespace swift
 			throw nullptr;
 		
 		sf::Vector2u texSize = batch.getTextureSize();
-		
-		vertices[0]->position = {0, 0};
-		vertices[1]->position = {static_cast<float>(texSize.x), 0};
-		vertices[2]->position = static_cast<sf::Vector2f>(texSize);
-		vertices[3]->position = {0, static_cast<float>(texSize.y)};
+
+        std::array<sf::Vector2f, 6> triangles = getTrianglesFromVector(sf::Vector2f(texSize));
+        for( int i = 0; i < 6; i++ ) { 
+            vertices[i]->position = triangles[i];
+        }
 	}
 
 	Sprite::Sprite(SpriteBatch& batch, const sf::IntRect& texRect)
 	:	Sprite(batch)
 	{
-		vertices[0]->texCoords = {static_cast<float>(texRect.left), static_cast<float>(texRect.top)};
-		vertices[1]->texCoords = {static_cast<float>(texRect.left) + static_cast<float>(texRect.width), static_cast<float>(texRect.top)};
-		vertices[2]->texCoords = {static_cast<float>(texRect.left) + static_cast<float>(texRect.width), static_cast<float>(texRect.top) + static_cast<float>(texRect.height)};
-		vertices[3]->texCoords = {static_cast<float>(texRect.left), static_cast<float>(texRect.top) + static_cast<float>(texRect.height)};
+        this->setTextureRect(texRect);
 	}
 
 	Sprite::~Sprite()
@@ -102,10 +103,10 @@ namespace swift
 
 	void Sprite::setTextureRect(const sf::IntRect& texRect)
 	{
-		vertices[0]->texCoords = {static_cast<float>(texRect.left), static_cast<float>(texRect.top)};
-		vertices[1]->texCoords = {static_cast<float>(texRect.left) + static_cast<float>(texRect.width), static_cast<float>(texRect.top)};
-		vertices[2]->texCoords = {static_cast<float>(texRect.left) + static_cast<float>(texRect.width), static_cast<float>(texRect.top) + static_cast<float>(texRect.height)};
-		vertices[3]->texCoords = {static_cast<float>(texRect.left), static_cast<float>(texRect.top) + static_cast<float>(texRect.height)};
+        std::array<sf::Vector2f, 6> triangles = getTrianglesFromRect(sf::FloatRect(texRect));
+        for( int i = 0; i < 6; i++ ) { 
+            vertices[i]->texCoords = triangles[i];
+        }
 	}
 
 	void Sprite::setColor(const sf::Color& color)
@@ -134,19 +135,19 @@ namespace swift
 		constexpr float PI = 3.14159265359f;
 		
 		// get the local coordinates
-		std::array<sf::Vector2f, 4> verts;
-		for(int i = 0; i < 4; i++)
+		std::array<sf::Vector2f, 6> verts;
+		for(int i = 0; i < 6; i++)
 			verts[i] = vertices[i]->position - vertices[0]->position - origin;
 		
-		std::array<sf::Vector2f, 4> newVerts;
-		for(int i = 0; i < 4; i++)
+		std::array<sf::Vector2f, 6> newVerts;
+		for(int i = 0; i < 6; i++)
 		{
 			newVerts[i] = {	verts[i].x * std::cos(angle * PI / 180.f) - verts[i].y * std::sin(angle * PI / 180.f), 
 							verts[i].x * std::sin(angle * PI / 180.f) + verts[i].y * std::cos(angle * PI / 180.f)};
 			newVerts[i] += origin + vertices[0]->position;
 		}
 		
-		for(int i = 3; i >= 0; i--)
+		for(int i = 5; i >= 0; i--)
 			vertices[i]->position = newVerts[i];
 	}
 

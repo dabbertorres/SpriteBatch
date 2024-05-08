@@ -20,7 +20,7 @@ namespace swift
 			
 			const std::vector<sf::Vertex>& getVertices() const;
 
-			std::array<sf::Vertex*, 4> addSprite();
+			std::array<sf::Vertex*, 6> addSprite();
 			sf::Vector2u getTextureSize() const;
 
 		private:
